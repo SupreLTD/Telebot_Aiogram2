@@ -17,11 +17,11 @@ async def answer_q1(message: types.Message, state: FSMContext):
     answer = message.text
 
     # await state.update_data(answer1=answer) #через update
-    # await state.update_data( # через словарь
-    # {'answer1':answer}
-    # )
-    async with state.proxy() as data:  # Через генератор
-        data['answer1'] = answer
+    await state.update_data(  # через словарь
+        {'answer1': answer}
+    )
+    # async with state.proxy() as data:  # Через генератор
+    #     data['answer1'] = answer
 
     await message.answer('Вопрос №2.\n'
                          'Ваша память ухудшилась?')
@@ -29,7 +29,8 @@ async def answer_q1(message: types.Message, state: FSMContext):
     # await Test.Q2.set()
     await Test.next()
 
-async def answer_2(message:types.Message, state: FSMContext):
+
+async def answer_2(message: types.Message, state: FSMContext):
     data = await state.get_data()
     answer1 = data.get('answer1')
     answer2 = message.text
@@ -38,9 +39,9 @@ async def answer_2(message:types.Message, state: FSMContext):
     await message.answer(f'Ответ 1: {answer1}')
     await message.answer(f'Ответ 2: {answer2}')
 
-    await state.finish() # сброс состояний
-    await state.reset_state() # так же сбрасывает состояние
-    await state.reset_state(with_data=False) # Сбрасывает состояние, но сохраняет данные
+    await state.finish()  # сброс состояний
+    await state.reset_state()  # так же сбрасывает состояние
+    await state.reset_state(with_data=False)  # Сбрасывает состояние, но сохраняет данные
 
 
 def register_testing(dp: Dispatcher):

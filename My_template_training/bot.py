@@ -3,7 +3,7 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-#from aiogram.contrib.fsm_storage.redis import RedisStorage2
+# from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
 from My_template_training.tg_bot.filters.admin import AdminFilter
 from My_template_training.tg_bot.handlers.admin import register_admin
@@ -29,7 +29,6 @@ def register_all_handlers(dp):
     register_admin(dp)
     register_user(dp)
     register_echo(dp)
-
 
 
 async def main():
